@@ -230,7 +230,7 @@ button { font: inherit; background: none; border: none; cursor: pointer; }
   font-size: clamp(42px, 5.8vw, 104px);
   line-height: 1.05;
   letter-spacing: -0.02em;
-  max-width: 980px;
+  max-width: 20ch;
   margin: 0 auto;
 }
 .hero-sub {
