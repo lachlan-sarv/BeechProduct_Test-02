@@ -546,17 +546,70 @@ button {
 /* ---------------------------------
    Footer
 --------------------------------- */
-.site-footer { padding: 56px 0; border-top: 1px solid var(--color-line); text-align: center; }
-.footer-inner {
+.site-footer {
+  background: var(--color-yellow);
+  padding: 56px 0 32px;
+  text-align: left;
+}
+.footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+}
+.footer-contact,
+.footer-nav,
+.footer-social {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 20px;
+  gap: 10px;
 }
-.footer-nav { display: flex; gap: 28px; flex-wrap: wrap; justify-content: center; }
-.footer-nav a { font-size: clamp(13px, 0.8vw, 15px); color: var(--color-ink-soft); }
-.footer-nav a:hover { color: var(--color-ink); }
-.footer-copy { font-size: clamp(12px, 0.7vw, 14px); color: var(--color-ink-soft); }
+.footer-contact a,
+.footer-social a,
+.footer-nav a,
+.footer-contact address {
+  font-size: clamp(14px, 0.85vw, 16px);
+  color: var(--color-ink);
+  font-style: normal;
+  line-height: 1.5;
+}
+.footer-contact a,
+.footer-social a,
+.footer-nav a {
+  width: fit-content;
+  transition: opacity 0.2s ease;
+}
+.footer-contact a:hover,
+.footer-social a:hover,
+.footer-nav a:hover {
+  opacity: 0.6;
+}
+.footer-acknowledgement {
+  margin-top: 48px;
+}
+.footer-acknowledgement p {
+  max-width: 560px;
+  font-size: clamp(13.5px, 0.8vw, 15px);
+  color: var(--color-ink);
+  opacity: 0.75;
+  line-height: 1.55;
+}
+.footer-bottom {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.footer-copy {
+  font-size: clamp(12px, 0.7vw, 14px);
+  color: var(--color-ink);
+  opacity: 0.75;
+}
+.footer-wordmark {
+  height: 28px;
+  width: auto;
+}
 
 /* ---------------------------------
    Reveal-on-scroll
@@ -616,6 +669,10 @@ button {
   .nav-toggle { display: flex; }
   .price-card { padding: 32px 24px; }
   .process-item { flex-direction: column; gap: 4px; }
+
+  .footer-top { flex-direction: column; gap: 32px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .footer-wordmark { width: 100%; height: auto; }
 }
 
 @media (max-width: 420px) {
