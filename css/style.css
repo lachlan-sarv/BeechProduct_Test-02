@@ -700,15 +700,16 @@ button {
 .quad-card--blue { border-top-color: #4c6ef5; }
 .quad-card--black { border-top-color: var(--color-ink); }
 .quad-num {
-  font-family: var(--font-serif);
-  font-size: clamp(13px, 0.8vw, 15px);
+  font-family: var(--font-mono);
+  font-size: clamp(13px, 0.85vw, 15px);
+  letter-spacing: 0.04em;
   color: var(--color-grey);
 }
 .quad-card h3 {
   font-family: var(--font-serif);
   font-weight: 400;
-  font-size: clamp(21px, 1.7vw, 29px);
-  margin: 10px 0 10px;
+  font-size: clamp(24px, 2vw, 34px);
+  margin: 12px 0 12px;
 }
 .quad-card p {
   color: var(--color-ink-soft);
@@ -728,32 +729,32 @@ button {
 /* ---------------------------------
    What you get
 --------------------------------- */
-.get-grid {
+.get-cards-grid {
   margin-top: 56px;
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 64px;
-  align-items: start;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
   text-align: left;
 }
-.get-list li {
-  padding: 24px 0;
-  border-bottom: 1px solid var(--color-line);
+.get-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-line);
+  border-radius: 20px;
+  padding: 32px 28px;
 }
-.get-list li:first-child { padding-top: 0; }
-.get-list li:last-child { border-bottom: none; }
-.get-list h3 {
+.get-card h3 {
   font-family: var(--font-serif);
   font-weight: 400;
-  font-size: clamp(19px, 1.3vw, 24px);
-  margin-bottom: 8px;
+  font-size: clamp(24px, 2vw, 32px);
+  margin-bottom: 12px;
 }
-.get-list p {
+.get-card p {
   color: var(--color-ink-soft);
   font-size: clamp(14.5px, 0.9vw, 16.5px);
 }
 .pull-quote {
-  margin: 0;
+  margin: 40px auto 0;
+  max-width: 720px;
   padding-left: 20px;
   border-left: 3px solid var(--color-yellow);
   font-family: var(--font-serif);
@@ -761,6 +762,7 @@ button {
   line-height: 1.4;
   font-style: normal;
   color: var(--color-ink);
+  text-align: left;
 }
 
 /* ---------------------------------
@@ -771,7 +773,7 @@ button {
   background: var(--color-ink);
   color: #fff;
   border-radius: 24px;
-  padding: 40px 36px;
+  padding: 48px 44px;
   text-align: left;
 }
 .radar-eyebrow {
@@ -783,11 +785,11 @@ button {
 .radar-heading {
   font-family: var(--font-serif);
   font-weight: 400;
-  font-size: clamp(19px, 1.4vw, 24px);
-  margin-top: 8px;
-  max-width: 480px;
+  font-size: clamp(26px, 2.2vw, 38px);
+  margin-top: 10px;
+  max-width: 620px;
 }
-.radar-chart { width: 100%; max-width: 460px; height: auto; display: block; margin: 32px auto 0; }
+.radar-chart { width: 100%; max-width: 640px; height: auto; display: block; margin: 40px auto 0; }
 .radar-legend {
   display: flex;
   align-items: center;
@@ -865,13 +867,11 @@ button {
   padding: 32px 30px;
 }
 .yesno-col h3 {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  text-align: left;
   font-family: var(--font-serif);
   font-weight: 400;
-  font-size: clamp(26px, 2.1vw, 36px);
-  margin-bottom: 16px;
+  font-size: clamp(30px, 2.6vw, 44px);
+  margin-bottom: 18px;
 }
 .yesno-list li {
   display: flex;
@@ -938,6 +938,25 @@ button {
   color: var(--color-ink);
   margin-bottom: 12px;
 }
+.testimonial-person {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.testimonial-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: repeating-linear-gradient(
+    135deg,
+    var(--color-line),
+    var(--color-line) 4px,
+    var(--color-surface) 4px,
+    var(--color-surface) 8px
+  );
+  border: 1px solid var(--color-line);
+}
 .testimonial-meta {
   font-family: var(--font-mono);
   font-size: 11px;
@@ -971,7 +990,7 @@ button {
   .split-copy { text-align: center; }
   .split-body { text-align: left; }
   .quad-grid { grid-template-columns: 1fr; }
-  .get-grid { grid-template-columns: 1fr; }
+  .get-cards-grid { grid-template-columns: 1fr; }
   .steps-grid { grid-template-columns: 1fr 1fr; }
   .yesno-grid { grid-template-columns: 1fr; }
   .testimonial-grid { grid-template-columns: 1fr; }
@@ -1014,6 +1033,7 @@ button {
   .quad-card { padding: 24px 20px 28px; }
   .step-card { padding: 24px 20px; }
   .yesno-col { padding: 24px 20px; }
+  .get-card { padding: 24px 20px; }
   .process-item { flex-direction: column; gap: 4px; }
   .steps-grid { grid-template-columns: 1fr; gap: 28px; }
   .radar-card { padding: 28px 20px; }
