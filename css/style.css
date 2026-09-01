@@ -148,7 +148,7 @@ button {
   white-space: nowrap;
 }
 .btn-primary {
-  background: var(--color-yellow);
+  background: limegreen;
   color: var(--color-ink);
 }
 .btn-primary:hover {
