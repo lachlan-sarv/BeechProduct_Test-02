@@ -5,9 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Website Audit — Beech</title>
 <meta name="description" content="A focused, two-week website audit that tells you exactly what's broken, what's working, and what to fix first — before you spend a cent on a rebuild.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -16,7 +13,7 @@
 
 <header class="site-header" id="siteHeader">
   <div class="container header-inner">
-    <a href="#top" class="logo">BEECH<span class="logo-dot">.</span></a>
+    <a href="#top" class="logo"><img src="assets/images/beech-logo.svg" alt="Beech" class="logo-img"></a>
 
     <nav class="main-nav" id="mainNav" aria-label="Primary">
       <a href="#how-it-works">How it works</a>
@@ -161,8 +158,8 @@
 
       <div class="price-card reveal">
         <div class="price-card-top">
-          <p class="price-card-name">The Complete Website Audit</p>
           <p class="price-card-amount">$6,500<span>AUD</span></p>
+          <p class="price-card-name">The Complete Website Audit</p>
         </div>
         <ul class="check-list price-card-list">
           <li>Full-site strategy, UX, content & technical audit</li>
@@ -240,7 +237,13 @@
       <p class="eyebrow eyebrow-light reveal">LET'S TALK</p>
       <h2 class="final-cta-heading reveal">Let's find out what your website could be doing for you.</h2>
       <p class="final-cta-sub reveal">Book a 20-minute call. No pitch deck, no pressure — just a conversation about where your site stands today.</p>
-      <a href="#" class="btn btn-primary reveal">Book a call</a>
+
+      <div class="calendly-wrap reveal">
+        <!-- Calendly inline widget begin -->
+        <div class="calendly-inline-widget" data-url="https://calendly.com/beech-agency/chat-with-chelsea?hide_gdpr_banner=1&primary_color=406dff" style="min-width:320px;height:700px;"></div>
+        <!-- Calendly inline widget end -->
+      </div>
+
       <p class="final-cta-email reveal">Prefer email? <a href="mailto:hello@beech.agency">hello@beech.agency</a></p>
     </div>
   </section>
@@ -249,7 +252,7 @@
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <a href="#top" class="logo footer-logo">BEECH<span class="logo-dot">.</span></a>
+    <a href="#top" class="logo footer-logo"><img src="assets/images/beech-logo.svg" alt="Beech" class="logo-img"></a>
     <nav class="footer-nav" aria-label="Footer">
       <a href="#how-it-works">How it works</a>
       <a href="#deliverables">What you get</a>
@@ -261,5 +264,6 @@
 </footer>
 
 <script src="js/script.js"></script>
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </body>
 </html>

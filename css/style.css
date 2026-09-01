@@ -1,4 +1,36 @@
 /* ---------------------------------
+   Fonts
+--------------------------------- */
+@font-face {
+  font-family: "Feature Deck";
+  src: url("../assets/fonts/FeatureDeck-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Sohne";
+  src: url("../assets/fonts/SohneBuch.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Sohne Mono";
+  src: url("../assets/fonts/SohneMonoBuch.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Sohne";
+  src: url("../assets/fonts/SohneHalbfett.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------------------------------
    Tokens
 --------------------------------- */
 :root {
@@ -8,10 +40,12 @@
   --color-line: #e7e5e0;
   --color-surface: #f7f5f1;
   --color-yellow: #ffd140;
-  --color-coral: #ff5d36;
+  --color-grey: #525252;
+  --color-grey-invert: #a3a3a3;
 
-  --font-serif: "Fraunces", Georgia, "Times New Roman", serif;
-  --font-sans: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-serif: "Feature Deck", Georgia, "Times New Roman", serif;
+  --font-sans: "Sohne", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: "Sohne Mono", "SF Mono", "Söhne Mono", Consolas, monospace;
 
   --container-width: 1160px;
   --header-height: 84px;
@@ -30,6 +64,7 @@ body {
   color: var(--color-ink);
   background: var(--color-bg);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 h1, h2, h3, p, ol, ul, figure { margin: 0; }
 ol, ul { padding: 0; list-style: none; }
@@ -58,14 +93,15 @@ button { font: inherit; background: none; border: none; cursor: pointer; }
    Type helpers
 --------------------------------- */
 .eyebrow {
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
   font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  color: var(--color-coral);
-  margin-bottom: 20px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--color-grey);
+  margin: 0 auto 20px;
+  text-align: center;
 }
-.eyebrow-light { color: var(--color-yellow); }
+.eyebrow-light { color: var(--color-grey-invert); }
 
 .section-heading {
   font-family: var(--font-serif);
@@ -73,14 +109,17 @@ button { font: inherit; background: none; border: none; cursor: pointer; }
   font-size: clamp(32px, 4.2vw, 52px);
   line-height: 1.12;
   letter-spacing: -0.01em;
-  max-width: 780px;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .section-lead {
   font-size: 19px;
   color: var(--color-ink-soft);
-  margin-top: 16px;
-  max-width: 560px;
+  margin: 16px auto 0;
+  max-width: 480px;
+  text-align: center;
 }
 
 /* ---------------------------------
@@ -93,7 +132,7 @@ button { font: inherit; background: none; border: none; cursor: pointer; }
   gap: 8px;
   padding: 16px 32px;
   border-radius: 999px;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 16px;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
   white-space: nowrap;
@@ -133,12 +172,14 @@ button { font: inherit; background: none; border: none; cursor: pointer; }
   gap: 24px;
 }
 .logo {
-  font-family: var(--font-sans);
-  font-weight: 800;
-  font-size: 22px;
-  letter-spacing: -0.02em;
+  display: inline-flex;
+  align-items: center;
 }
-.logo-dot { color: var(--color-coral); }
+.logo-img {
+  height: 24px;
+  width: auto;
+}
+.footer-logo .logo-img { height: 20px; }
 
 .main-nav {
   display: flex;
@@ -147,7 +188,7 @@ button { font: inherit; background: none; border: none; cursor: pointer; }
 }
 .main-nav a {
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--color-ink-soft);
   transition: color 0.2s ease;
 }
@@ -179,6 +220,7 @@ button { font: inherit; background: none; border: none; cursor: pointer; }
 --------------------------------- */
 .hero {
   padding: 120px 0 100px;
+  text-align: center;
 }
 .hero-heading {
   font-family: var(--font-serif);
@@ -186,32 +228,34 @@ button { font: inherit; background: none; border: none; cursor: pointer; }
   font-size: clamp(40px, 6.4vw, 84px);
   line-height: 1.05;
   letter-spacing: -0.02em;
-  max-width: 920px;
+  max-width: 840px;
+  margin: 0 auto;
 }
 .hero-sub {
-  margin-top: 28px;
+  margin: 28px auto 0;
   font-size: 20px;
   color: var(--color-ink-soft);
-  max-width: 600px;
+  max-width: 560px;
   line-height: 1.55;
 }
 .hero-cta {
-  margin-top: 40px;
+  margin: 40px auto 0;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
 }
 .hero-cta-note {
   font-size: 14px;
   color: var(--color-ink-soft);
-  font-weight: 500;
+  font-weight: 400;
 }
 
 /* ---------------------------------
    Sections (generic)
 --------------------------------- */
-.section { padding: 96px 0; }
+.section { padding: 96px 0; text-align: center; }
 .section.problem { background: var(--color-surface); }
 
 /* ---------------------------------
@@ -222,6 +266,7 @@ button { font: inherit; background: none; border: none; cursor: pointer; }
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 28px;
+  text-align: center;
 }
 .problem-card {
   background: var(--color-bg);
@@ -232,13 +277,13 @@ button { font: inherit; background: none; border: none; cursor: pointer; }
 .problem-num {
   font-family: var(--font-serif);
   font-size: 15px;
-  color: var(--color-coral);
-  font-weight: 600;
+  color: var(--color-grey);
+  font-weight: 400;
 }
 .problem-card h3 {
   font-family: var(--font-serif);
   font-size: 24px;
-  font-weight: 500;
+  font-weight: 400;
   margin: 18px 0 12px;
 }
 .problem-card p {
@@ -250,60 +295,70 @@ button { font: inherit; background: none; border: none; cursor: pointer; }
    Process list
 --------------------------------- */
 .process-list {
-  margin-top: 56px;
+  margin: 48px auto 0;
+  max-width: 720px;
   border-top: 1px solid var(--color-line);
+  text-align: left;
 }
 .process-item {
   display: flex;
-  gap: 40px;
-  padding: 36px 0;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 18px 0;
   border-bottom: 1px solid var(--color-line);
-  align-items: baseline;
 }
 .process-num {
   font-family: var(--font-serif);
-  font-size: 22px;
-  color: var(--color-ink-soft);
-  min-width: 48px;
+  font-size: 16px;
+  color: var(--color-grey);
+  min-width: 24px;
   flex-shrink: 0;
+  padding-top: 2px;
 }
 .process-body h3 {
   font-family: var(--font-serif);
-  font-size: 26px;
-  font-weight: 500;
-  margin-bottom: 10px;
+  font-size: 19px;
+  font-weight: 400;
+  margin-bottom: 4px;
 }
 .process-body p {
   color: var(--color-ink-soft);
+  font-size: 14.5px;
+  line-height: 1.5;
   max-width: 560px;
-  font-size: 16px;
 }
-.inline-cta { margin-top: 56px; }
+.inline-cta { margin-top: 48px; text-align: center; }
 
 /* ---------------------------------
    Deliverables
 --------------------------------- */
 .deliverables-grid {
-  margin-top: 56px;
+  margin: 56px auto 0;
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   gap: 48px;
   align-items: start;
+  text-align: left;
+}
+.check-list {
+  text-align: left;
+  width: 100%;
 }
 .check-list li {
-  position: relative;
-  padding: 14px 0 14px 36px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 0;
   border-bottom: 1px solid var(--color-line);
   font-size: 16.5px;
 }
 .check-list li:first-child { padding-top: 0; }
 .check-list li::before {
   content: "✓";
-  position: absolute;
-  left: 0;
-  top: 14px;
+  flex-shrink: 0;
   width: 22px;
   height: 22px;
+  margin-top: 2px;
   color: var(--color-ink);
   font-size: 13px;
   font-weight: 700;
@@ -318,11 +373,15 @@ button { font: inherit; background: none; border: none; cursor: pointer; }
   color: #fff;
   border-radius: 24px;
   padding: 40px 36px;
+  text-align: left;
 }
 .deliverables-card-label {
   font-family: var(--font-serif);
   font-size: 22px;
   margin-bottom: 22px;
+}
+.plain-list {
+  text-align: left;
 }
 .plain-list li {
   padding: 14px 0;
@@ -338,38 +397,42 @@ button { font: inherit; background: none; border: none; cursor: pointer; }
 --------------------------------- */
 .section.pricing { background: var(--color-surface); }
 .price-card {
-  margin-top: 56px;
-  max-width: 560px;
+  margin: 56px auto 0;
+  max-width: 480px;
   background: var(--color-bg);
   border: 1px solid var(--color-line);
   border-radius: 28px;
   padding: 48px;
+  text-align: center;
 }
 .price-card-top {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 20px;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
   padding-bottom: 28px;
   border-bottom: 1px solid var(--color-line);
-  margin-bottom: 10px;
-  flex-wrap: wrap;
-}
-.price-card-name {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--color-ink-soft);
+  margin-bottom: 28px;
 }
 .price-card-amount {
   font-family: var(--font-serif);
-  font-size: 44px;
+  font-size: 60px;
+  line-height: 1;
 }
 .price-card-amount span {
   font-family: var(--font-sans);
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--color-ink-soft);
   margin-left: 6px;
+}
+.price-card-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-grey);
+}
+.check-list.price-card-list {
+  margin: 0 auto;
 }
 .price-card-list li { font-size: 15.5px; }
 .price-card-note {
@@ -383,9 +446,10 @@ button { font: inherit; background: none; border: none; cursor: pointer; }
    FAQ / Accordion
 --------------------------------- */
 .accordion {
-  margin-top: 48px;
+  margin: 48px auto 0;
   border-top: 1px solid var(--color-line);
-  max-width: 760px;
+  max-width: 680px;
+  text-align: left;
 }
 .accordion-item { border-bottom: 1px solid var(--color-line); }
 .accordion-trigger {
@@ -396,12 +460,12 @@ button { font: inherit; background: none; border: none; cursor: pointer; }
   padding: 26px 4px;
   text-align: left;
   font-size: 17px;
-  font-weight: 600;
+  font-weight: 700;
 }
 .accordion-icon {
   font-family: var(--font-serif);
   font-size: 22px;
-  color: var(--color-coral);
+  color: var(--color-grey);
   transition: transform 0.25s ease;
   flex-shrink: 0;
   margin-left: 20px;
@@ -453,18 +517,26 @@ button { font: inherit; background: none; border: none; cursor: pointer; }
 }
 .final-cta-email a { text-decoration: underline; color: #fff; }
 
+.calendly-wrap {
+  width: 100%;
+  margin-top: -60px;
+}
+.calendly-wrap .calendly-inline-widget {
+  margin: 0 auto;
+  max-width: 760px;
+}
+
 /* ---------------------------------
    Footer
 --------------------------------- */
-.site-footer { padding: 56px 0; border-top: 1px solid var(--color-line); }
+.site-footer { padding: 56px 0; border-top: 1px solid var(--color-line); text-align: center; }
 .footer-inner {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
   gap: 20px;
 }
-.footer-nav { display: flex; gap: 28px; flex-wrap: wrap; }
+.footer-nav { display: flex; gap: 28px; flex-wrap: wrap; justify-content: center; }
 .footer-nav a { font-size: 14px; color: var(--color-ink-soft); }
 .footer-nav a:hover { color: var(--color-ink); }
 .footer-copy { font-size: 13px; color: var(--color-ink-soft); }
@@ -490,12 +562,24 @@ button { font: inherit; background: none; border: none; cursor: pointer; }
 @media (max-width: 900px) {
   .card-grid { grid-template-columns: 1fr; }
   .deliverables-grid { grid-template-columns: 1fr; }
-  .process-item { gap: 24px; }
+}
+
+@media screen and (max-width: 767px) {
+  .calendly-wrap {
+    margin-top: -30px;
+  }
 }
 
 @media (max-width: 760px) {
   :root { --header-height: 68px; }
   .container { padding: 0 20px; }
+
+  .hero-heading,
+  .section-heading,
+  .final-cta-heading {
+    text-wrap: balance;
+  }
+
   .main-nav {
     position: fixed;
     top: var(--header-height);
@@ -522,4 +606,15 @@ button { font: inherit; background: none; border: none; cursor: pointer; }
   .hero { padding: 64px 0 64px; }
   .section { padding: 64px 0; }
   .price-card { padding: 32px 24px; }
+  .process-item { flex-direction: column; gap: 4px; }
+}
+
+@media (max-width: 420px) {
+  .container { padding: 0 16px; }
+  .hero { padding: 48px 0 48px; }
+  .section { padding: 48px 0; }
+  .price-card { padding: 24px 16px; }
+  .price-card-amount { font-size: 48px; }
+  .btn { padding: 14px 26px; font-size: 15px; }
+  .problem-card { padding: 28px 20px; }
 }
