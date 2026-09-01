@@ -645,7 +645,7 @@ button {
 .split-layout {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
-  gap: 64px;
+  gap: 96px;
   align-items: center;
 }
 .split-layout--reverse { grid-template-columns: 0.9fr 1.1fr; }
@@ -659,7 +659,7 @@ button {
 }
 .image-placeholder {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 4 / 5;
   border-radius: 16px;
   background: repeating-linear-gradient(
     135deg,
@@ -685,16 +685,16 @@ button {
   margin-top: 56px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  column-gap: 56px;
+  gap: 28px;
   text-align: left;
 }
 .quad-card {
-  padding-top: 20px;
-  padding-bottom: 36px;
-  border-top: 3px solid transparent;
-  border-bottom: 1px solid var(--color-line);
+  background: var(--color-bg);
+  border: 1px solid var(--color-line);
+  border-top: 4px solid transparent;
+  border-radius: 20px;
+  padding: 28px 26px 32px;
 }
-.quad-card:nth-child(3), .quad-card:nth-child(4) { border-bottom: none; }
 .quad-card--yellow { border-top-color: var(--color-yellow); }
 .quad-card--red { border-top-color: #ff5d36; }
 .quad-card--blue { border-top-color: #4c6ef5; }
@@ -822,8 +822,14 @@ button {
   margin-top: 56px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 32px;
+  gap: 24px;
   text-align: left;
+}
+.step-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-line);
+  border-radius: 20px;
+  padding: 28px 24px;
 }
 .step-num {
   display: block;
@@ -849,17 +855,23 @@ button {
 .yesno-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 56px;
+  gap: 28px;
   text-align: left;
+}
+.yesno-col {
+  background: var(--color-bg);
+  border: 1px solid var(--color-line);
+  border-radius: 20px;
+  padding: 32px 30px;
 }
 .yesno-col h3 {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   font-family: var(--font-serif);
   font-weight: 400;
-  font-size: clamp(20px, 1.4vw, 26px);
-  margin-bottom: 12px;
+  font-size: clamp(26px, 2.1vw, 36px);
+  margin-bottom: 16px;
 }
 .yesno-list li {
   display: flex;
@@ -870,7 +882,8 @@ button {
   color: var(--color-ink-soft);
   font-size: clamp(14.5px, 0.9vw, 16px);
 }
-.yesno-list li:last-child { border-bottom: none; }
+.yesno-list li:first-child { padding-top: 0; }
+.yesno-list li:last-child { border-bottom: none; padding-bottom: 0; }
 .yesno-icon {
   flex-shrink: 0;
   width: 22px;
@@ -958,8 +971,6 @@ button {
   .split-copy { text-align: center; }
   .split-body { text-align: left; }
   .quad-grid { grid-template-columns: 1fr; }
-  .quad-card:nth-child(3), .quad-card:nth-child(4) { border-bottom: 1px solid var(--color-line); }
-  .quad-card:last-child { border-bottom: none; }
   .get-grid { grid-template-columns: 1fr; }
   .steps-grid { grid-template-columns: 1fr 1fr; }
   .yesno-grid { grid-template-columns: 1fr; }
@@ -1000,6 +1011,9 @@ button {
   .header-actions .btn-small { display: none; }
   .nav-toggle { display: flex; }
   .price-card { padding: 32px 24px; }
+  .quad-card { padding: 24px 20px 28px; }
+  .step-card { padding: 24px 20px; }
+  .yesno-col { padding: 24px 20px; }
   .process-item { flex-direction: column; gap: 4px; }
   .steps-grid { grid-template-columns: 1fr; gap: 28px; }
   .radar-card { padding: 28px 20px; }
