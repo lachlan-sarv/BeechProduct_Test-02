@@ -45,6 +45,19 @@
     });
   });
 
+  // Calendly popup: open the scheduler in a modal from any "Book a call"
+  // button, falling back to the normal #book-a-call anchor scroll if the
+  // Calendly script hasn't loaded yet
+  var calendlyUrl = "https://calendly.com/beech-agency/chat-with-chelsea?hide_gdpr_banner=1&primary_color=406dff";
+  document.querySelectorAll(".calendly-popup-trigger").forEach(function (btn) {
+    btn.addEventListener("click", function (e) {
+      if (window.Calendly) {
+        e.preventDefault();
+        window.Calendly.initPopupWidget({ url: calendlyUrl });
+      }
+    });
+  });
+
   // Calendly: resize the widget to its actual content height so the
   // page scrolls as one continuous flow instead of an inner iframe scroll
   window.addEventListener("message", function (e) {
