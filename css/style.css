@@ -729,53 +729,98 @@ button {
 /* ---------------------------------
    What you get
 --------------------------------- */
-.get-cards-grid {
+.get-sticky-section {
   margin-top: 56px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 28px;
+  gap: 64px;
+  align-items: start;
   text-align: left;
 }
-.get-card {
-  background: var(--color-bg);
-  border: 1px solid var(--color-line);
-  border-radius: 20px;
-  padding: 32px 28px;
+.get-steps {
+  display: flex;
+  flex-direction: column;
 }
-.get-card h3 {
+.get-step-runway {
+  min-height: 130vh;
+  display: flex;
+  align-items: center;
+}
+.get-step-runway:first-child { min-height: 90vh; }
+.get-step-runway:last-child { min-height: 90vh; }
+.get-step {
+  position: sticky;
+  top: 140px;
+  display: flex;
+  gap: 20px;
+  opacity: 0.35;
+  transition: opacity 0.5s ease;
+}
+.get-step.is-active { opacity: 1; }
+.get-step-track {
+  position: relative;
+  width: 4px;
+  flex-shrink: 0;
+  align-self: stretch;
+  border-radius: 999px;
+  background: var(--color-line);
+  overflow: hidden;
+}
+.get-step-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 0%;
+  background: var(--color-yellow);
+  border-radius: 999px;
+  transition: height 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.get-step.is-active .get-step-fill { height: 100%; }
+.get-step-inner { flex: 1; min-width: 0; }
+.get-step-num {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--color-grey);
+  margin-bottom: 10px;
+}
+.get-step h3 {
   font-family: var(--font-serif);
   font-weight: 400;
-  font-size: clamp(24px, 2vw, 32px);
+  font-size: clamp(26px, 2.1vw, 36px);
   margin-bottom: 12px;
 }
-.get-card p {
+.get-step p {
   color: var(--color-ink-soft);
-  font-size: clamp(14.5px, 0.9vw, 16.5px);
+  font-size: clamp(15px, 0.95vw, 17px);
+  max-width: 420px;
 }
-.pull-quote {
-  margin: 40px auto 0;
-  max-width: 720px;
-  padding-left: 20px;
-  border-left: 3px solid var(--color-yellow);
-  font-family: var(--font-serif);
-  font-size: clamp(18px, 1.3vw, 22px);
-  line-height: 1.4;
-  font-style: normal;
-  color: var(--color-ink);
-  text-align: left;
+.get-sticky-visual {
+  position: sticky;
+  top: 140px;
+  align-self: start;
 }
 
 /* ---------------------------------
    Radar scorecard
 --------------------------------- */
 .radar-card {
-  margin-top: 56px;
   background: var(--color-ink);
   color: #fff;
   border-radius: 24px;
   padding: 48px 44px;
   text-align: left;
+  height: calc(100vh - 180px);
+  max-height: 760px;
+  min-height: 560px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
 }
+.radar-intro { flex-shrink: 0; }
 .radar-eyebrow {
   font-family: var(--font-mono);
   font-size: 12px;
@@ -785,11 +830,33 @@ button {
 .radar-heading {
   font-family: var(--font-serif);
   font-weight: 400;
-  font-size: clamp(26px, 2.2vw, 38px);
+  font-size: clamp(24px, 2vw, 32px);
   margin-top: 10px;
-  max-width: 620px;
+  max-width: 460px;
 }
-.radar-chart { width: 100%; max-width: 640px; height: auto; display: block; margin: 40px auto 0; }
+.radar-visual { width: 100%; }
+.radar-chart { width: 100%; max-width: 420px; height: auto; display: block; margin: 32px auto 0; }
+.wedge { transition: opacity 0.5s ease; }
+.radar-card.emphasize-0 .wedge-1,
+.radar-card.emphasize-0 .wedge-2,
+.radar-card.emphasize-0 .wedge-3,
+.radar-card.emphasize-1 .wedge-0,
+.radar-card.emphasize-1 .wedge-2,
+.radar-card.emphasize-1 .wedge-3,
+.radar-card.emphasize-2 .wedge-0,
+.radar-card.emphasize-2 .wedge-1,
+.radar-card.emphasize-2 .wedge-3,
+.radar-card.emphasize-3 .wedge-0,
+.radar-card.emphasize-3 .wedge-1,
+.radar-card.emphasize-3 .wedge-2 {
+  opacity: 0.04;
+}
+.radar-card.emphasize-0 .wedge-0,
+.radar-card.emphasize-1 .wedge-1,
+.radar-card.emphasize-2 .wedge-2,
+.radar-card.emphasize-3 .wedge-3 {
+  opacity: 0.4;
+}
 .radar-legend {
   display: flex;
   align-items: center;
@@ -990,7 +1057,8 @@ button {
   .split-copy { text-align: center; }
   .split-body { text-align: left; }
   .quad-grid { grid-template-columns: 1fr; }
-  .get-cards-grid { grid-template-columns: 1fr; }
+  .get-sticky-section { grid-template-columns: 1fr; gap: 32px; }
+  .get-sticky-visual { position: static; }
   .steps-grid { grid-template-columns: 1fr 1fr; }
   .yesno-grid { grid-template-columns: 1fr; }
   .testimonial-grid { grid-template-columns: 1fr; }
@@ -1033,10 +1101,13 @@ button {
   .quad-card { padding: 24px 20px 28px; }
   .step-card { padding: 24px 20px; }
   .yesno-col { padding: 24px 20px; }
-  .get-card { padding: 24px 20px; }
+  .get-step-runway { min-height: 0; padding: 24px 0; }
+  .get-step { position: static; opacity: 1; }
   .process-item { flex-direction: column; gap: 4px; }
   .steps-grid { grid-template-columns: 1fr; gap: 28px; }
-  .radar-card { padding: 28px 20px; }
+  .radar-card { padding: 28px 20px; height: auto; min-height: 0; max-height: none; text-align: center; }
+  .radar-intro { text-align: center; }
+  .radar-heading { max-width: none; margin-left: auto; margin-right: auto; }
 
   .footer-top { flex-direction: column; gap: 32px; }
   .footer-bottom { flex-direction: column; align-items: flex-start; gap: 20px; }
