@@ -474,7 +474,7 @@ button {
 }
 .accordion-icon {
   font-family: var(--font-serif);
-  font-size: clamp(20px, 1.1vw, 24px);
+  font-size: clamp(40px, 2.2vw, 48px);
   color: var(--color-grey);
   transition: transform 0.25s ease;
   flex-shrink: 0;
