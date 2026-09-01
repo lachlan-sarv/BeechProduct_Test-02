@@ -45,6 +45,17 @@
     });
   });
 
+  // Calendly: resize the widget to its actual content height so the
+  // page scrolls as one continuous flow instead of an inner iframe scroll
+  window.addEventListener("message", function (e) {
+    if (e.data && e.data.event === "calendly.page_height") {
+      var widget = document.querySelector(".calendly-inline-widget");
+      if (widget) {
+        widget.style.height = e.data.payload.height + "px";
+      }
+    }
+  });
+
   // Scroll reveal
   var revealEls = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window) {
