@@ -487,8 +487,8 @@ button { font: inherit; background: none; border: none; cursor: pointer; }
    Final CTA
 --------------------------------- */
 .final-cta {
-  background: var(--color-ink);
-  color: #fff;
+  background: var(--color-surface);
+  color: var(--color-ink);
   text-align: center;
 }
 .final-cta-inner {
@@ -506,17 +506,27 @@ button { font: inherit; background: none; border: none; cursor: pointer; }
 .final-cta-sub {
   margin-top: 22px;
   font-size: 18px;
-  color: rgba(255,255,255,0.72);
+  color: var(--color-ink-soft);
   max-width: 520px;
 }
 .final-cta .btn { margin-top: 36px; }
 .final-cta-email {
-  margin-top: 24px;
+  margin-top: 32px;
   font-size: 14.5px;
-  color: rgba(255,255,255,0.6);
+  color: var(--color-ink-soft);
 }
-.final-cta-email a { text-decoration: underline; color: #fff; }
+.final-cta-email a { text-decoration: underline; color: var(--color-ink); }
 
+.calendly-card {
+  width: 100%;
+  max-width: 900px;
+  margin-top: 40px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-line);
+  border-radius: 24px;
+  padding: 60px 16px 16px;
+  overflow: hidden;
+}
 .calendly-wrap {
   width: 100%;
   margin-top: -60px;
@@ -567,6 +577,9 @@ button { font: inherit; background: none; border: none; cursor: pointer; }
 @media screen and (max-width: 767px) {
   .calendly-wrap {
     margin-top: -30px;
+  }
+  .calendly-card {
+    padding-top: 30px;
   }
 }
 
