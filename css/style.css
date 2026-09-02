@@ -859,9 +859,10 @@ button {
 .radar-heading {
   font-family: var(--font-serif);
   font-weight: 400;
-  font-size: clamp(24px, 2vw, 32px);
+  font-size: clamp(30px, 2.8vw, 44px);
+  line-height: 1.2;
   margin-top: 10px;
-  max-width: 460px;
+  max-width: 580px;
 }
 .radar-visual {
   width: 100%;
