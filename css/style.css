@@ -753,8 +753,8 @@ button {
 }
 .get-stage {
   position: sticky;
-  top: 0;
-  height: 100vh;
+  top: var(--header-height);
+  height: calc(100vh - var(--header-height));
   padding: var(--stage-pad) 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1155,7 +1155,7 @@ button {
     flex-wrap: nowrap;
     gap: 12px;
     width: max-content;
-    animation: hero-pills-marquee 18s linear infinite;
+    animation: hero-pills-marquee 13s linear infinite;
   }
   .hero-pills-track .pill {
     flex-shrink: 0;
