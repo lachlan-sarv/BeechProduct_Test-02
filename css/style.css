@@ -51,7 +51,7 @@
   --container-pad: clamp(20px, 4vw, 80px);
   --header-height: 84px;
   --space-section: clamp(72px, 8vw, 140px);
-  --stage-pad: clamp(96px, 10vh, 120px);
+  --stage-pad: clamp(72px, 10vh, 96px);
 }
 
 /* ---------------------------------
@@ -648,12 +648,16 @@ button {
 --------------------------------- */
 .split-layout {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 96px;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: 1.5rem;
   align-items: center;
 }
-.split-layout--reverse { grid-template-columns: 0.9fr 1.1fr; }
-.split-layout--reverse .split-media { order: -1; }
+/* Image spans cols 1-6, copy sits in cols 9-12 — cols 7-8 stay empty as
+   the gap between them. Reverse mirrors it: copy in 1-4, image in 7-12. */
+.split-media { grid-column: 1 / 7; }
+.split-copy { grid-column: 9 / 13; }
+.split-layout--reverse .split-media { grid-column: 7 / 13; }
+.split-layout--reverse .split-copy { grid-column: 1 / 5; }
 .split-copy { text-align: left; }
 .split-body { margin-top: 24px; display: flex; flex-direction: column; gap: 16px; }
 .split-body p {
@@ -959,7 +963,7 @@ button {
 .step-card h3 {
   font-family: var(--font-serif);
   font-weight: 400;
-  font-size: clamp(17px, 1.1vw, 19px);
+  font-size: clamp(19px, 1.5vw, 23px);
   margin: 12px 0 8px;
 }
 .step-card p {
@@ -1051,7 +1055,8 @@ button {
   border-radius: 4px;
 }
 .testimonial-card p {
-  font-size: clamp(14.5px, 0.9vw, 16px);
+  font-size: 1.25rem;
+  line-height: 1.45;
   color: var(--color-ink);
   margin-bottom: 12px;
 }
@@ -1109,6 +1114,10 @@ button {
   .card-grid { grid-template-columns: 1fr; }
   .deliverables-grid { grid-template-columns: 1fr; }
   .split-layout { grid-template-columns: 1fr; gap: 32px; }
+  .split-media,
+  .split-copy,
+  .split-layout--reverse .split-media,
+  .split-layout--reverse .split-copy { grid-column: auto; }
   .split-layout--reverse .split-media { order: 0; }
   .split-copy { text-align: center; }
   .split-body { text-align: left; }
