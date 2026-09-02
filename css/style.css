@@ -248,10 +248,11 @@ button {
   font-size: clamp(18px, 1.35vw, 24px);
   color: var(--color-ink-soft);
   max-width: 640px;
-  line-height: 1.55;
+  line-height: 1.36;
 }
+/* Sits above the headline, in place of the old eyebrow */
 .hero-pills {
-  margin: 28px auto 0;
+  margin: 0 auto 28px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -283,12 +284,6 @@ button {
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
-}
-.hero-cta-note {
-  margin-top: 16px;
-  font-size: clamp(13px, 0.8vw, 15px);
-  color: var(--color-ink-soft);
-  font-weight: 400;
 }
 
 /* ---------------------------------
