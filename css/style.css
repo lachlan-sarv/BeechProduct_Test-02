@@ -258,6 +258,14 @@ button {
   justify-content: center;
   gap: 12px;
 }
+/* Desktop: the track lays its children straight into the flex-wrap row
+   above, and the duplicate (aria-hidden) pills stay hidden */
+.hero-pills-track {
+  display: contents;
+}
+.hero-pills-track .pill[aria-hidden="true"] {
+  display: none;
+}
 .pill {
   display: inline-flex;
   align-items: center;
@@ -652,6 +660,17 @@ button {
   color: var(--color-ink-soft);
   font-size: clamp(15px, 0.95vw, 17px);
   line-height: 1.6;
+}
+.split-image {
+  width: 100%;
+  /* height:auto is required — the img's height attribute would otherwise
+     win and aspect-ratio would never apply */
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 16px;
+  display: block;
 }
 .image-placeholder {
   width: 100%;
@@ -1075,6 +1094,12 @@ button {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
+  .hero-pills-track { animation: none !important; }
+}
+
+@keyframes hero-pills-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
 /* ---------------------------------
@@ -1112,6 +1137,32 @@ button {
 
 @media (max-width: 760px) {
   :root { --header-height: 68px; }
+
+  /* Swap the wrapping pill row for an auto-scrolling marquee: the track
+     doubles the pill set and loops by translating exactly one set width */
+  .hero-pills {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow: hidden;
+    margin-left: calc(-1 * var(--container-pad));
+    margin-right: calc(-1 * var(--container-pad));
+    padding-left: var(--container-pad);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 24px, black calc(100% - 24px), transparent);
+    mask-image: linear-gradient(to right, transparent, black 24px, black calc(100% - 24px), transparent);
+  }
+  .hero-pills-track {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 12px;
+    width: max-content;
+    animation: hero-pills-marquee 18s linear infinite;
+  }
+  .hero-pills-track .pill {
+    flex-shrink: 0;
+  }
+  .hero-pills-track .pill[aria-hidden="true"] {
+    display: inline-flex;
+  }
 
   .hero-heading,
   .section-heading,
