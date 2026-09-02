@@ -69,52 +69,69 @@
     }
   });
 
-  // "What you get" sticky steps: highlight whichever step's runway is
-  // crossing the centre of the viewport, and nudge the scorecard's wedge
-  // emphasis to match
-  var getRunways = document.querySelectorAll(".get-step-runway");
+  // "What you get": while the stage is pinned, scroll progress picks the
+  // active step. The steps track then slides in one motion so the active
+  // step sits dead centre, and the scorecard's wedge emphasis follows.
+  var scrollTrack = document.querySelector(".get-scroll-track");
+  var stepsTrack = document.querySelector(".get-steps");
+  var getSteps = document.querySelectorAll(".get-step");
   var radarCard = document.querySelector(".radar-card");
-  if (getRunways.length && "IntersectionObserver" in window) {
-    var runwayObserver = new IntersectionObserver(
-      function (entries) {
-        // A fast/large scroll can report several runways as intersecting
-        // in the same batch; pick whichever is nearest the viewport centre
-        var bestEntry = null;
-        var bestDistance = Infinity;
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            var entryCenter = entry.boundingClientRect.top + entry.boundingClientRect.height / 2;
-            var rootCenter = entry.rootBounds
-              ? (entry.rootBounds.top + entry.rootBounds.bottom) / 2
-              : window.innerHeight / 2;
-            var distance = Math.abs(entryCenter - rootCenter);
-            if (distance < bestDistance) {
-              bestDistance = distance;
-              bestEntry = entry;
-            }
-          }
-        });
+  var stageQuery = window.matchMedia("(min-width: 901px)");
+  var currentStep = -1;
 
-        if (bestEntry) {
-          var index = Array.prototype.indexOf.call(getRunways, bestEntry.target);
-          getRunways.forEach(function (runway) {
-            var step = runway.querySelector(".get-step");
-            if (step) step.classList.remove("is-active");
-          });
-          var activeStep = bestEntry.target.querySelector(".get-step");
-          if (activeStep) activeStep.classList.add("is-active");
+  function layoutSteps() {
+    if (!scrollTrack || !stepsTrack || !getSteps.length) return;
 
-          if (radarCard) {
-            radarCard.classList.remove("emphasize-0", "emphasize-1", "emphasize-2", "emphasize-3");
-            if (index >= 0 && index <= 3) {
-              radarCard.classList.add("emphasize-" + index);
-            }
-          }
-        }
-      },
-      { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
-    );
-    getRunways.forEach(function (runway) { runwayObserver.observe(runway); });
+    // Below the breakpoint the steps just stack in normal flow
+    if (!stageQuery.matches) {
+      stepsTrack.style.transform = "";
+      getSteps.forEach(function (step) { step.classList.add("is-active"); });
+      currentStep = -1;
+      return;
+    }
+
+    var rect = scrollTrack.getBoundingClientRect();
+    var travel = rect.height - window.innerHeight;
+    var progress = travel > 0 ? -rect.top / travel : 0;
+    progress = Math.max(0, Math.min(0.999999, progress));
+
+    var index = Math.floor(progress * getSteps.length);
+    index = Math.max(0, Math.min(getSteps.length - 1, index));
+    if (index === currentStep) return;
+    currentStep = index;
+
+    var active = getSteps[index];
+    getSteps.forEach(function (step) { step.classList.remove("is-active"); });
+    active.classList.add("is-active");
+
+    // Centre the active step: the track sits at top:50%, so shifting it up
+    // by the step's own centre lines that step up with the stage's middle
+    var offset = active.offsetTop + active.offsetHeight / 2;
+    stepsTrack.style.transform = "translateY(" + -offset + "px)";
+
+    if (radarCard) {
+      radarCard.classList.remove("emphasize-0", "emphasize-1", "emphasize-2", "emphasize-3");
+      if (index <= 3) radarCard.classList.add("emphasize-" + index);
+    }
+  }
+
+  if (scrollTrack && stepsTrack && getSteps.length) {
+    var stepsTicking = false;
+    window.addEventListener("scroll", function () {
+      if (stepsTicking) return;
+      stepsTicking = true;
+      window.requestAnimationFrame(function () {
+        layoutSteps();
+        stepsTicking = false;
+      });
+    }, { passive: true });
+
+    window.addEventListener("resize", function () {
+      currentStep = -1;
+      layoutSteps();
+    });
+
+    layoutSteps();
   }
 
   // Scroll reveal

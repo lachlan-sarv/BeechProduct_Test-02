@@ -51,6 +51,7 @@
   --container-pad: clamp(20px, 4vw, 80px);
   --header-height: 84px;
   --space-section: clamp(72px, 8vw, 140px);
+  --stage-pad: clamp(96px, 10vh, 120px);
 }
 
 /* ---------------------------------
@@ -729,32 +730,45 @@ button {
 /* ---------------------------------
    What you get
 --------------------------------- */
-.get-sticky-section {
+/* The scroll track gives the pinned stage room to travel: roughly one
+   viewport of scroll per step. */
+.get-scroll-track {
   margin-top: 56px;
+  position: relative;
+  height: calc(5 * 100vh);
+}
+.get-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding: var(--stage-pad) 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: minmax(0, 1fr);
   gap: 64px;
-  align-items: start;
+  align-items: stretch;
   text-align: left;
 }
+.get-steps-viewport {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
 .get-steps {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
   display: flex;
   flex-direction: column;
+  gap: 72px;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.get-step-runway {
-  min-height: 130vh;
-  display: flex;
-  align-items: center;
-}
-.get-step-runway:first-child { min-height: 90vh; }
-.get-step-runway:last-child { min-height: 90vh; }
 .get-step {
-  position: sticky;
-  top: 140px;
   display: flex;
   gap: 20px;
-  opacity: 0.35;
-  transition: opacity 0.5s ease;
+  opacity: 0.25;
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .get-step.is-active { opacity: 1; }
 .get-step-track {
@@ -797,11 +811,7 @@ button {
   font-size: clamp(15px, 0.95vw, 17px);
   max-width: 420px;
 }
-.get-sticky-visual {
-  position: sticky;
-  top: 140px;
-  align-self: start;
-}
+.get-visual { height: 100%; }
 
 /* ---------------------------------
    Radar scorecard
@@ -810,14 +820,11 @@ button {
   background: var(--color-ink);
   color: #fff;
   border-radius: 24px;
-  padding: 48px 44px;
+  padding: 40px 40px 36px;
   text-align: left;
-  height: calc(100vh - 180px);
-  max-height: 760px;
-  min-height: 560px;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   overflow: hidden;
 }
 .radar-intro { flex-shrink: 0; }
@@ -834,8 +841,36 @@ button {
   margin-top: 10px;
   max-width: 460px;
 }
-.radar-visual { width: 100%; }
-.radar-chart { width: 100%; max-width: 420px; height: auto; display: block; margin: 32px auto 0; }
+.radar-visual {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+/* The chart takes whatever space is left in the card. Its viewBox has
+   built-in padding for the axis labels and preserveAspectRatio="meet"
+   scales the drawing to fit the box, so it can grow without clipping. */
+.radar-chart {
+  flex: 1;
+  /* must stay 0 so a short viewport shrinks the chart rather than
+     pushing the legend past the card's hidden overflow */
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Short viewports: trim the chrome so the chart keeps usable room */
+@media (min-width: 901px) and (max-height: 800px) {
+  .radar-card { padding: 28px 32px 24px; }
+  .radar-heading { font-size: clamp(20px, 1.6vw, 25px); margin-top: 6px; }
+  .radar-visual { gap: 12px; }
+  .radar-key { font-size: 12px; gap: 8px 20px; }
+}
 .wedge { transition: opacity 0.5s ease; }
 .radar-card.emphasize-0 .wedge-1,
 .radar-card.emphasize-0 .wedge-2,
@@ -858,6 +893,7 @@ button {
   opacity: 0.4;
 }
 .radar-legend {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -873,11 +909,11 @@ button {
 .radar-legend-line--solid { border-top-color: var(--color-yellow); }
 .radar-legend-line--dashed { border-top-color: rgba(255,255,255,0.65); border-top-style: dashed; margin-left: 20px; }
 .radar-key {
-  margin-top: 20px;
+  flex-shrink: 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 16px 28px;
+  gap: 12px 28px;
   font-size: 13px;
   color: rgba(255,255,255,0.75);
 }
@@ -1057,8 +1093,22 @@ button {
   .split-copy { text-align: center; }
   .split-body { text-align: left; }
   .quad-grid { grid-template-columns: 1fr; }
-  .get-sticky-section { grid-template-columns: 1fr; gap: 32px; }
-  .get-sticky-visual { position: static; }
+  /* Drop the pinned scroll stage entirely on smaller screens */
+  .get-scroll-track { height: auto; }
+  .get-stage {
+    position: static;
+    height: auto;
+    padding: 0;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .get-steps-viewport { height: auto; overflow: visible; }
+  .get-steps {
+    position: static;
+    transform: none !important;
+    gap: 40px;
+  }
+  .get-visual { height: auto; }
   .steps-grid { grid-template-columns: 1fr 1fr; }
   .yesno-grid { grid-template-columns: 1fr; }
   .testimonial-grid { grid-template-columns: 1fr; }
@@ -1101,11 +1151,12 @@ button {
   .quad-card { padding: 24px 20px 28px; }
   .step-card { padding: 24px 20px; }
   .yesno-col { padding: 24px 20px; }
-  .get-step-runway { min-height: 0; padding: 24px 0; }
-  .get-step { position: static; opacity: 1; }
+  .get-step { opacity: 1; }
   .process-item { flex-direction: column; gap: 4px; }
   .steps-grid { grid-template-columns: 1fr; gap: 28px; }
-  .radar-card { padding: 28px 20px; height: auto; min-height: 0; max-height: none; text-align: center; }
+  .radar-card { padding: 28px 20px; height: auto; text-align: center; }
+  .radar-visual { flex: none; }
+  .radar-chart { flex: none; height: auto; max-width: 460px; margin-top: 8px; }
   .radar-intro { text-align: center; }
   .radar-heading { max-width: none; margin-left: auto; margin-right: auto; }
 
