@@ -178,14 +178,17 @@ button {
 }
 .header-inner {
   height: var(--header-height);
-  display: flex;
+  display: grid;
+  /* Equal 1fr edge columns keep the nav truly centred on the container,
+     regardless of the logo and button being different widths */
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
   gap: 24px;
 }
 .logo {
   display: inline-flex;
   align-items: center;
+  justify-self: start;
 }
 .logo-img {
   height: 24px;
@@ -196,7 +199,7 @@ button {
 .main-nav {
   display: flex;
   gap: 36px;
-  margin: 0 auto;
+  justify-self: center;
 }
 .main-nav a {
   font-size: clamp(14px, 0.85vw, 16px);
@@ -206,7 +209,7 @@ button {
 }
 .main-nav a:hover { color: var(--color-ink); }
 
-.header-actions { display: flex; align-items: center; gap: 16px; }
+.header-actions { display: flex; align-items: center; gap: 16px; justify-self: end; }
 
 .nav-toggle {
   display: none;
